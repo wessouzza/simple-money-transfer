@@ -12,8 +12,8 @@ import java.util.UUID;
 @Table(name = "transactions")
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private BigDecimal amount;
     @ManyToOne
     @JoinColumn(name = "payer_id")
@@ -25,7 +25,7 @@ public class Transaction {
 
     public Transaction(){}
 
-    public Transaction(UUID id, BigDecimal amount, User payer, User payee, LocalDateTime timeStamps){
+    public Transaction(Long id, BigDecimal amount, User payer, User payee, LocalDateTime timeStamps){
         this.id = id;
         this.amount = amount;
         this.payer = payer;
@@ -33,11 +33,11 @@ public class Transaction {
         this.timeStamps = timeStamps;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -6,10 +6,9 @@ import com.simplepicpay.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -26,4 +25,15 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(message.getMessage());
         }
     }
+
+    @GetMapping
+    public ResponseEntity<?> showUsers(){
+        try {
+            List<User> users = userService.showUsers();
+            return ResponseEntity.ok(users);
+        }catch (ErrorMessage message){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message.getMessage());
+        }
+    }
+
 }
